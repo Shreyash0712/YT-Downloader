@@ -1,4 +1,4 @@
-# YT-Downloader
+# YT-Grab
 
 The idea was simple: I was tired of going to website with sketchy ads and redirects just to download a YouTube video, and sometimes you just have to download a snippet from a video and downloading it whole and snipping it is just a pain. I also like to merge a playlist into a single video for watching - I couldn't find a tool that did all that together - so I made one.
 
@@ -36,8 +36,8 @@ The app will launch instantly in your terminal!
 However, if you're a dev or just like to fiddle with code, you can clone the repository and run the app locally:
 
 ```bash
-git clone https://github.com/Shreyash0712/YT-Downloader.git
-cd YT-Downloader
+git clone https://github.com/Shreyash0712/YT-Grab.git
+cd YT-Grab
 pnpm install
 pnpm dev
 ```

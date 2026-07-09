@@ -16,12 +16,12 @@ export interface DownloadOptions {
 
 /**
  * Returns the final base directory where media should be stored.
- * E.g., Downloads/yt-downloader/<Title>/
+ * E.g., Downloads/yt-grab/<Title>/
  */
 export function getFinalOutputDir(title: string): string {
   const downloadsFolder = path.join(os.homedir(), 'Downloads');
   const safeTitle = title.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_');
-  return path.join(downloadsFolder, 'yt-downloader', safeTitle);
+  return path.join(downloadsFolder, 'yt-grab', safeTitle);
 }
 
 /**

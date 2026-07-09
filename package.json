@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shreyash0712/YT-Downloader.git"
+    "url": "git+https://github.com/Shreyash0712/YT-Grab.git"
   },
   "bugs": {
-    "url": "https://github.com/Shreyash0712/YT-Downloader/issues"
+    "url": "https://github.com/Shreyash0712/YT-Grab/issues"
   },
-  "homepage": "https://github.com/Shreyash0712/YT-Downloader#readme",
+  "homepage": "https://github.com/Shreyash0712/YT-Grab#readme",
   "keywords": [
     "youtube",
     "downloader",
