@@ -28,7 +28,7 @@ Since this app acts as a beautiful orchestrator, it needs a couple of heavy-lift
 You don't even need to clone the repository. As long as you have the prerequisites above, just run:
 
 ```bash
-npx yt-downloader
+npx yt-grab
 ```
 
 The app will launch instantly in your terminal!
