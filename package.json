@@ -1,6 +1,6 @@
 {
   "name": "mux-yt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple TUI app that allows basic trimming, merging and downloading of YouTube videos, playlists, and shorts.",
   "main": "index.js",
   "type": "module",
