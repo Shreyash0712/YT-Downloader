@@ -1,26 +1,26 @@
 {
-  "name": "yt-grab",
+  "name": "mux-yt",
   "version": "1.0.0",
   "description": "A simple TUI app that allows basic trimming, merging and downloading of YouTube videos, playlists, and shorts.",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "yt-grab": "./bin/yt-downloader.js"
+    "mux-yt": "./bin/mux-yt.js"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/ui/index.tsx",
-    "start": "node ./bin/yt-downloader.js",
+    "start": "node ./bin/mux-yt.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shreyash0712/YT-Grab.git"
+    "url": "git+https://github.com/Shreyash0712/Mux-YT.git"
   },
   "bugs": {
-    "url": "https://github.com/Shreyash0712/YT-Grab/issues"
+    "url": "https://github.com/Shreyash0712/Mux-YT/issues"
   },
-  "homepage": "https://github.com/Shreyash0712/YT-Grab#readme",
+  "homepage": "https://github.com/Shreyash0712/Mux-YT#readme",
   "keywords": [
     "youtube",
     "downloader",

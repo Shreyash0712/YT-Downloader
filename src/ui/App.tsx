@@ -58,7 +58,7 @@ export function App() {
       <Box justifyContent="space-between" alignItems="center" marginBottom={1} flexWrap="wrap" gap={1}>
         <Box borderStyle="single" borderColor="cyanBright" paddingX={2}>
           <Gradient name="pastel">
-            <Text bold>YT - DOWNLOADER</Text>
+            <Text bold>MUX - YT</Text>
           </Gradient>
         </Box>
         <Box flexDirection="column" alignItems="flex-end">
