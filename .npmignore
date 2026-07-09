@@ -1,0 +1,9 @@
+# ignore source files and configs in the published npm package
+src/
+docs/
+PROJECT.md
+tsconfig.json
+
+# temporary downloader files
+.temp_ytdl/
+*.log

@@ -1,0 +1,41 @@
+{
+  "name": "yt-downloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "yt-downloader": "./bin/yt-downloader.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/ui/index.tsx",
+    "start": "node ./bin/yt-downloader.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
+  "dependencies": {
+    "execa": "^9.6.1",
+    "figlet": "^1.11.0",
+    "ink": "^7.1.0",
+    "ink-gradient": "^4.0.1",
+    "ink-text-input": "^6.0.0",
+    "react": "^19.2.7",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.7.0",
+    "@types/ink-gradient": "^2.0.4",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@typescript-eslint/eslint-plugin": "^8.63.0",
+    "@typescript-eslint/parser": "^8.63.0",
+    "eslint": "^10.6.0",
+    "prettier": "^3.9.4",
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2"
+  }
+}
