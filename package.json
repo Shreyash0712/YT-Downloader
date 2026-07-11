@@ -1,6 +1,6 @@
 {
   "name": "mux-yt",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A simple TUI app that allows basic trimming, merging and downloading of YouTube videos, playlists, and shorts.",
   "main": "index.js",
   "type": "module",
@@ -11,7 +11,7 @@
     "build": "tsc",
     "dev": "tsx src/ui/index.tsx",
     "start": "node ./bin/mux-yt.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsx test/verify-all.ts"
   },
   "repository": {
     "type": "git",

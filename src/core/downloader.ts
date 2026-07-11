@@ -78,13 +78,13 @@ export function buildYtDlpArgs(options: DownloadOptions, outputDir: string): str
  * Executes yt-dlp to download the media.
  * Returns the execa child process so the UI can listen to stdout for progress.
  */
-export function downloadMedia(options: DownloadOptions) {
+export function downloadMedia(options: DownloadOptions, binaryPath = 'yt-dlp') {
   const finalDir = getFinalOutputDir(options.title);
   const targetDir = options.tempDir || finalDir;
 
   const args = buildYtDlpArgs(options, targetDir);
 
-  return execa('yt-dlp', args, {
+  return execa(binaryPath, args, {
     all: true,
   });
 }

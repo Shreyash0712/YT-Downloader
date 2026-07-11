@@ -1,6 +1,7 @@
 import { execa } from 'execa';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { resolveBinary } from './binaries.js';
 
 /**
  * Merges media files using ffmpeg concat demuxer.
@@ -32,9 +33,12 @@ export async function mergeMedia(
   const fileLines = mediaFiles.map((f: string) => `file '${f.replace(/'/g, "'\\''")}'`);
   await fs.writeFile(filesTxtPath, fileLines.join('\n'), 'utf-8');
 
+  // Resolve dynamic ffmpeg path
+  const ffmpegPath = await resolveBinary('ffmpeg');
+
   // Execute ffmpeg concat
   await execa(
-    'ffmpeg',
+    ffmpegPath,
     [
       '-f', 'concat',
       '-safe', '0',

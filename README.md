@@ -6,32 +6,20 @@ The idea was simple: I was tired of going to website with sketchy ads and redire
 
 ![Interface](docs/image.png)
 
-## Prerequisites
-
-Since this app acts as a beautiful orchestrator, it needs a couple of heavy-lifters installed on your system. 
-
-1. **[Node.js](https://nodejs.org/)** (v18+) 
-   - Download and install directly from the [official website](https://nodejs.org/).
-2. **[yt-dlp](https://github.com/yt-dlp/yt-dlp#installation)** (The core downloader)
-   - **Mac:** `brew install yt-dlp`
-   - **Windows:** `winget install yt-dlp` or use [Scoop](https://scoop.sh/)/[Chocolatey](https://chocolatey.org/).
-   - **Linux:** Check your package manager or download the [release binary](https://github.com/yt-dlp/yt-dlp/wiki/Installation).
-3. **[FFmpeg](https://ffmpeg.org/download.html)** (For merging and fast-trimming)
-   - **Mac:** `brew install ffmpeg`
-   - **Windows:** `winget install ffmpeg`
-   - **Linux:** `sudo apt install ffmpeg`
-
-> **Note:** Ensure both `yt-dlp` and `ffmpeg` are accessible in your system's PATH.
-
 ## Usage
 
-You don't even need to clone the repository. As long as you have the prerequisites above, just run:
+You don't need to clone the repository or install media tools manually. As long as you have [Node.js](https://nodejs.org/) (v18+) (check version using `node --version` in your terminal), just run:
 
 ```bash
 npx mux-yt
 ```
 
 The app will launch instantly in your terminal!
+
+> **Note:** Mux-YT requires [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation) and [FFmpeg](https://ffmpeg.org/download.html). You can install them or let the app automatically download and configure them for you on first launch across all supported platforms (it may take a bit more time than usual on first run):
+> - **Windows** (`x64`, `arm64`, `x86`)
+> - **macOS** (`Apple Silicon` & `Intel`)
+> - **Linux** (`x64`, `arm64`, `arm`)
 
 However, if you're a dev or just like to fiddle with code, you can clone the repository and run the app locally:
 

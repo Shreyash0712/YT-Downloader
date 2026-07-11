@@ -2,6 +2,7 @@ import { GlobalState, Action } from '../state/types.js';
 import { Dispatch } from 'react';
 import { downloadMedia, getFinalOutputDir } from './downloader.js';
 import { mergeMedia, cleanupTempDir } from './merger.js';
+import { resolveBinary } from './binaries.js';
 import path from 'node:path';
 import os from 'node:os';
 import fs from 'node:fs/promises';
@@ -15,6 +16,8 @@ export async function executeWorkflow(state: GlobalState, dispatch: Dispatch<Act
     if (state.isMergeMode) {
       await fs.mkdir(tempDirBase, { recursive: true });
     }
+
+    const ytDlpPath = await resolveBinary('yt-dlp');
 
     for (const item of state.queue) {
       if (item.status === 'completed') continue;
@@ -35,7 +38,7 @@ export async function executeWorkflow(state: GlobalState, dispatch: Dispatch<Act
           startLimit: item.startLimit,
           endLimit: item.endLimit,
           tempDir: state.isMergeMode ? tempDirBase : undefined,
-        });
+        }, ytDlpPath);
 
         downloadProcess.stdout?.on('data', (chunk: any) => {
           const output = chunk.toString();

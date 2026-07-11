@@ -1,4 +1,5 @@
 import { execa } from 'execa';
+import { resolveBinary } from './binaries.js';
 
 export type MediaType = 'video' | 'playlist';
 
@@ -14,8 +15,10 @@ export interface MediaMetadata {
  * Fetches metadata for a given YouTube URL (single video or playlist).
  */
 export async function fetchMetadata(url: string): Promise<MediaMetadata> {
+  const ytDlpPath = await resolveBinary('yt-dlp');
+
   // Use --flat-playlist to avoid fetching individual video details for playlists, which is much faster.
-  const { stdout } = await execa('yt-dlp', [
+  const { stdout } = await execa(ytDlpPath, [
     '--dump-single-json',
     '--flat-playlist',
     url,
