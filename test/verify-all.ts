@@ -22,9 +22,8 @@ const TARGETS: TestTarget[] = [
 
 async function verifyLiveUrl(url: string, name: string, platform: string, arch: string): Promise<boolean> {
   try {
-    const res = await fetch(url, { method: 'HEAD', redirect: 'manual' });
-    // GitHub release download URLs typically return 302/303/307 redirecting to AWS S3 / release CDN, or 200 OK
-    const isValid = res.status === 200 || res.status === 301 || res.status === 302 || res.status === 303 || res.status === 307;
+    const res = await fetch(url, { method: 'HEAD', redirect: 'follow' });
+    const isValid = res.status === 200 || res.ok;
     if (isValid) {
       console.log(`  ✅ [${name}] (${platform}/${arch}) -> HTTP ${res.status} Verified: ${url}`);
       return true;
@@ -40,7 +39,7 @@ async function verifyLiveUrl(url: string, name: string, platform: string, arch: 
 
 async function runVerificationSuite() {
   console.log('\n======================================================');
-  console.log('🧪 Mux-YT v2.0.0 Pre-Publish Verification Suite');
+  console.log('🧪 Mux-YT v2.0.1 Pre-Publish Verification Suite');
   console.log('======================================================\n');
 
   let totalTests = 0;
@@ -108,7 +107,7 @@ async function runVerificationSuite() {
   console.log('======================================================\n');
 
   if (passedTests === totalTests) {
-    console.log('🎉 SUCCESS: All cross-platform URLs, binary resolvers, and package structures verified! Mux-YT v2.0.0 is 100% ready for publishing.');
+    console.log('🎉 SUCCESS: All cross-platform URLs, binary resolvers, and package structures verified! Mux-YT v2.0.1 is 100% ready for publishing.');
     process.exit(0);
   } else {
     console.error('⚠️ FAILURE: One or more pre-publish verification tests failed. Please review the errors above.');

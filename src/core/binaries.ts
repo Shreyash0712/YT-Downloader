@@ -1,6 +1,6 @@
 import { execa } from 'execa';
 import fs from 'node:fs/promises';
-import { createWriteStream } from 'node:fs';
+import { createWriteStream, readdirSync } from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import zlib from 'node:zlib';
@@ -59,6 +59,28 @@ export async function testBinary(cmdPath: string, name: BinaryName): Promise<boo
 }
 
 /**
+ * Detects if the current Linux system uses musl libc (e.g. Alpine Linux) instead of glibc.
+ */
+export function isMusl(platform: string = os.platform()): boolean {
+  if (platform !== 'linux') return false;
+  try {
+    const report = (process.report as any)?.getReport()?.header;
+    if (report && report.glibcVersionRuntime === undefined) {
+      return true;
+    }
+  } catch {
+    // ignore
+  }
+  try {
+    const libFiles = readdirSync('/lib');
+    if (libFiles.some(f => f.includes('musl'))) return true;
+  } catch {
+    // ignore
+  }
+  return false;
+}
+
+/**
  * Returns the standalone download URL for yt-dlp according to current OS and Architecture.
  */
 export function getYtDlpDownloadInfo(platform: string = os.platform(), arch: string = os.arch()): { url: string; isGzip: boolean } {
@@ -73,12 +95,13 @@ export function getYtDlpDownloadInfo(platform: string = os.platform(), arch: str
     return { url: `${baseUrl}/yt-dlp_macos`, isGzip: false };
   } else {
     // linux and others
+    const musl = isMusl(platform);
     if (arch === 'arm64' || arch === 'aarch64') {
-      return { url: `${baseUrl}/yt-dlp_linux_aarch64`, isGzip: false };
+      return { url: musl ? `${baseUrl}/yt-dlp_musllinux_aarch64` : `${baseUrl}/yt-dlp_linux_aarch64`, isGzip: false };
     } else if (arch === 'arm') {
-      return { url: `${baseUrl}/yt-dlp_linux_armv7l`, isGzip: false };
+      return { url: `${baseUrl}/yt-dlp`, isGzip: false };
     }
-    return { url: `${baseUrl}/yt-dlp_linux`, isGzip: false };
+    return { url: musl ? `${baseUrl}/yt-dlp_musllinux` : `${baseUrl}/yt-dlp_linux`, isGzip: false };
   }
 }
 
@@ -91,24 +114,24 @@ export function getFfmpegDownloadInfo(platform: string = os.platform(), arch: st
 
   if (platform === 'win32') {
     if (arch === 'ia32') {
-      return { url: `${baseUrl}/win32-ia32.gz`, isGzip: true };
+      return { url: 'https://github.com/eugeneware/ffmpeg-static/releases/download/b6.0/ffmpeg-win32-ia32.gz', isGzip: true };
     }
-    return { url: `${baseUrl}/win32-x64.gz`, isGzip: true };
+    return { url: `${baseUrl}/ffmpeg-win32-x64.gz`, isGzip: true };
   } else if (platform === 'darwin') {
     if (arch === 'arm64') {
-      return { url: `${baseUrl}/darwin-arm64.gz`, isGzip: true };
+      return { url: `${baseUrl}/ffmpeg-darwin-arm64.gz`, isGzip: true };
     }
-    return { url: `${baseUrl}/darwin-x64.gz`, isGzip: true };
+    return { url: `${baseUrl}/ffmpeg-darwin-x64.gz`, isGzip: true };
   } else {
     // linux and others
     if (arch === 'arm64' || (arch as string) === 'aarch64') {
-      return { url: `${baseUrl}/linux-arm64.gz`, isGzip: true };
+      return { url: `${baseUrl}/ffmpeg-linux-arm64.gz`, isGzip: true };
     } else if (arch === 'ia32') {
-      return { url: `${baseUrl}/linux-ia32.gz`, isGzip: true };
+      return { url: `${baseUrl}/ffmpeg-linux-ia32.gz`, isGzip: true };
     } else if (arch === 'arm') {
-      return { url: `${baseUrl}/linux-arm.gz`, isGzip: true };
+      return { url: `${baseUrl}/ffmpeg-linux-arm.gz`, isGzip: true };
     }
-    return { url: `${baseUrl}/linux-x64.gz`, isGzip: true };
+    return { url: `${baseUrl}/ffmpeg-linux-x64.gz`, isGzip: true };
   }
 }
 
@@ -183,7 +206,8 @@ export async function downloadBinary(name: BinaryName, onProgress?: (percent: nu
   const isValid = await testBinary(targetPath, name);
   if (!isValid) {
     await fs.rm(targetPath, { force: true });
-    throw new Error(`Downloaded ${name} binary failed self-verification. Please check your system architecture compatibility.`);
+    const muslNote = process.platform === 'linux' ? ' If you are on Alpine Linux or another musl-based distribution, please install gcompat (e.g. apk add gcompat) or install ffmpeg/yt-dlp via your package manager.' : '';
+    throw new Error(`Downloaded ${name} binary failed self-verification. Please check your system architecture compatibility.${muslNote}`);
   }
 
   onProgress?.(100, `${name} ready!`);

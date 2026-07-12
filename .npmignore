@@ -1,8 +1,11 @@
 # ignore source files and configs in the published npm package
 src/
 docs/
-PROJECT.md
+test/
+eslint.config.js
 tsconfig.json
+PROJECT.md
+pnpm-lock.yaml
 
 # temporary downloader files
 .temp_ytdl/
