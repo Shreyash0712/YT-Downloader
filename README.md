@@ -17,6 +17,7 @@ npx mux-yt
 The app will launch instantly in your terminal!
 
 > **Note:** Mux-YT requires [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation) and [FFmpeg](https://ffmpeg.org/download.html). You can install them or let the app automatically download and configure them for you on first launch across all supported platforms (it may take a bit more time than usual on first run):
+> (This auto dependency configuration feature is still very new (introduced in v2) - even though I have checked and it seems to be working, please let me know if you face any issues)
 > - **Windows** (`x64`, `arm64`, `x86`)
 > - **macOS** (`Apple Silicon` & `Intel`)
 > - **Linux** (`x64`, `arm64`, `arm`)
