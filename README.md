@@ -1,5 +1,9 @@
 # Mux-YT
 
+[![npm version](https://img.shields.io/npm/v/mux-yt.svg)](https://www.npmjs.com/package/mux-yt)
+[![npm downloads](https://img.shields.io/npm/dt/mux-yt.svg)](https://www.npmjs.com/package/mux-yt)
+[![license](https://img.shields.io/npm/l/mux-yt.svg)](https://github.com/Shreyash0712/Mux-YT/blob/main/package.json)
+
 The idea was simple: I was tired of going to website with sketchy ads and redirects just to download a YouTube video, and sometimes you just have to download a snippet from a video and downloading it whole and snipping it is just a pain. I also like to merge a playlist into a single video for watching - I couldn't find a tool that did all that together - so I made one.
 
 ## Screenshot
